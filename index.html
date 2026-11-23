@@ -7,9 +7,9 @@
 </head>
 <body>
     <script type="module">
-        import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.187.0/+esm";
-        import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js"
-
+        import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js";
+        import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/loaders/GLTFLoader.js";
+        
         // Scene
         const scene = new THREE.Scene();
 
@@ -23,7 +23,7 @@
 
         // Gun
         const loader = new GLTFLoader()
-        loader.load("nice.glb", function (gltf) {
+        loader.load("./nice.glb", function (gltf) {
             let object = gltf.scene
             scene.add( object )
         })
