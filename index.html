@@ -23,6 +23,7 @@
       import * as THREE from 'three';
       import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
       import { ARButton } from 'three/addons/webxr/ARButton.js';
+      import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
       
       // Scene
       const scene = new THREE.Scene();
@@ -69,6 +70,10 @@
         function(error) {
           console.error('Error loading GLTF:', error);
       });
+
+      // Controller
+      const controller = renderer.xr.getControllerGrip(0);
+      scene.add(controller);
       
       // Resize
       window.addEventListener('resize', () => {
