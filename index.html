@@ -44,12 +44,13 @@
       scene.add(light);
       const loader = new GLTFLoader();
       // Load GLTF model
+      let gun = null
       loader.load('gun.glb', // or .glb
         function(gltf) {
-          let root = gltf.scene;
-          root.scale.set(0.01, 0.01, 0.01)
-          root.rotation.set(Math.PI / 4, 0, 0)
-          scene.add(root)
+          gun = gltf.scene;
+          gun.scale.set(0.01, 0.01, 0.01)
+          gun.rotation.set(Math.PI / 4, 0, 0)
+          scene.add(gun)
           console.log('Model loaded:', gltf.scene);
         }, undefined, // progress
         function(error) {
