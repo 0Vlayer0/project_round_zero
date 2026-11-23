@@ -49,7 +49,7 @@
         function(gltf) {
           gun = gltf.scene;
           gun.scale.set(0.01, 0.01, 0.01)
-          gun.rotation.set(Math.PI / 4, 0, 0)
+          gun.rotation.set(-Math.PI / 2, 0, 0)
           scene.add(gun)
           console.log('Model loaded:', gltf.scene);
         }, undefined, // progress
