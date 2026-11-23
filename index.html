@@ -48,6 +48,7 @@
         function(gltf) {
           let root = gltf.scene;
           root.scale.set(0.01, 0.01, 0.01)
+          root.rotation.set(Math.PI / 4, 0, 0)
           scene.add(root)
           console.log('Model loaded:', gltf.scene);
         }, undefined, // progress
