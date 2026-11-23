@@ -60,7 +60,8 @@ const loader = new GLTFLoader();
 loader.load(
   'nice.glb', // or .glb
   function (gltf) {
-    scene.add(gltf.scene);
+    let root = gltf.scene;
+    root.scale.set(0.1, 0.1, 0.1)
     console.log('Model loaded:', gltf.scene);
   },
   undefined, // progress
