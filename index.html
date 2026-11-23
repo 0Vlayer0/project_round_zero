@@ -85,7 +85,7 @@
       const right_controller_pos = new THREE.Vector3()
       // Animation
       function animate() {
-        right_controller.getWorld.Position(right_controller_pos);
+        right_controller.getWorldPosition(right_controller_pos);
         renderer.render(scene, camera);
       }
       renderer.setAnimationLoop(animate);
