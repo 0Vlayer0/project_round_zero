@@ -57,22 +57,40 @@
       scene.add(light);
       const loader = new GLTFLoader();
 
-      // Controller
-      let right_controller = renderer.xr.getControllerGrip(1);
-      scene.add(right_controller);
+      // Controllers
+      let right_controller = null;
+      let gun = null;
       
-      // Load GLTF model
-      let gun = null
-      loader.load('gun.glb', // or .glb
-        function(gltf) {
-          gun = gltf.scene;
-          gun.scale.set(0.0025, 0.0025, 0.0025)
-          gun.rotation.set(-Math.PI / 2, 0, 0)
-          right_controller.add(gun)
-          console.log(right_controller)
-        }, undefined, // progress
-        function(error) {
-          console.error('Error loading GLTF:', error);
+      const controllerModelFactory = new XRControllerModelFactory();
+      
+      for (let i = 0; i < 2; i++) {
+        const grip = renderer.xr.getControllerGrip(i);
+        scene.add(grip);
+        grip.add(controllerModelFactory.createControllerModel(grip));
+        grip.addEventListener('connected', (event) => {
+          if (event.data.handedness === 'right') {
+            right_controller = grip;
+      
+          if (gun) {
+            right_controller.add(gun);
+          }
+    
+          console.log('Right controller connected');
+        }
+        });
+      }
+      
+      // Gun
+      loader.load('gun.glb', (gltf) => {
+        gun = gltf.scene;
+      
+        gun.scale.setScalar(0.0025);
+        gun.rotation.set(-Math.PI / 2, 0, 0);
+        gun.position.set(0, 0, -0.1);
+      
+        if (right_controller) {
+          right_controller.add(gun);
+        }
       });
       
       // Resize
