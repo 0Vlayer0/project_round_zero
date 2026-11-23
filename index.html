@@ -1,91 +1,71 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Three.js</title>
-
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
     </style>
-</head>
-<body>
-
-<script type="importmap">
-    {
+  </head>
+  <body>
+    <script type="importmap"> {
         "imports": {
             "three": "https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js",
             "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/"
+            }
         }
-    }
-</script>
-
-<script type="module">
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
-// Scene
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x111111);
-
-// Camera
-const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-);
-camera.position.z = 5;
-
-// Renderer
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
-document.body.appendChild(renderer.domElement);
-
-// Lighting
-scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(5, 5, 5);
-scene.add(light);
-
-const loader = new GLTFLoader();
-
-// Load GLTF model
-loader.load(
-  'nice.glb', // or .glb
-  function (gltf) {
-    let root = gltf.scene;
-    root.scale.set(0.1, 0.1, 0.1)
-    scene.add(root)
-    console.log('Model loaded:', gltf.scene);
-  },
-  undefined, // progress
-  function (error) {
-    console.error('Error loading GLTF:', error);
-  }
-);
-
-// Resize
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-});
-
-// Animation
-function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-}
-
-animate();
-</script>
-
-</body>
+    </script>
+    <script type="module">
+      import * as THREE from 'three';
+      import {
+        GLTFLoader
+      } from 'three/addons/loaders/GLTFLoader.js';
+      // Scene
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x111111);
+      // Camera
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 5;
+      // Renderer
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      document.body.appendChild(renderer.domElement);
+      // Lighting
+      scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(5, 5, 5);
+      scene.add(light);
+      const loader = new GLTFLoader();
+      // Load GLTF model
+      loader.load('nice.glb', // or .glb
+        function(gltf) {
+          let root = gltf.scene;
+          root.scale.set(0.1, 0.1, 0.1)
+          scene.add(root)
+          console.log('Model loaded:', gltf.scene);
+        }, undefined, // progress
+        function(error) {
+          console.error('Error loading GLTF:', error);
+        });
+      // Resize
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+      // Animation
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+      animate();
+    </script>
+  </body>
 </html>
