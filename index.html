@@ -62,6 +62,7 @@ loader.load(
   function (gltf) {
     let root = gltf.scene;
     root.scale.set(0.1, 0.1, 0.1)
+    scene.add(root)
     console.log('Model loaded:', gltf.scene);
   },
   undefined, // progress
