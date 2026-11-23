@@ -57,40 +57,19 @@
       scene.add(light);
       const loader = new GLTFLoader();
 
-      // Controllers
-      let right_controller = null;
-      let gun = null;
-      
-      const controllerModelFactory = new XRControllerModelFactory();
-      
-      for (let i = 0; i < 2; i++) {
-        const grip = renderer.xr.getControllerGrip(i);
-        scene.add(grip);
-        grip.add(controllerModelFactory.createControllerModel(grip));
-        grip.addEventListener('connected', (event) => {
-          if (event.data.handedness === 'right') {
-            right_controller = grip;
-      
-          if (gun) {
-            right_controller.add(gun);
-          }
-    
-          console.log('Right controller connected');
-        }
-        });
-      }
+      // Controller
+      const controller = renderer.xr.getControllerGrip(1);
+      scene.add(controller);
       
       // Gun
+      const loader = new GLTFLoader();
+      
       loader.load('gun.glb', (gltf) => {
-        gun = gltf.scene;
-      
-        gun.scale.setScalar(0.0025);
-        gun.rotation.set(-Math.PI / 2, 0, 0);
-        gun.position.set(0, 0, -0.1);
-      
-        if (right_controller) {
-          right_controller.add(gun);
-        }
+          const gun = gltf.scene;
+          gun.scale.setScalar(0.0025);
+          gun.position.set(0, 0, -0.1);
+          gun.rotation.set(-Math.PI / 2, 0, 0);
+          controller.add(gun)
       });
       
       // Resize
@@ -100,11 +79,12 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
       });
 
-      const right_controller_pos = new THREE.Vector3()
+      // Controller position
+      const controllerPosition = new THREE.Vector3();
       // Animation
       function animate() {
-        right_controller.getWorldPosition(right_controller_pos);
-        renderer.render(scene, camera);
+          controller.getWorldPosition(controllerPosition);
+          renderer.render(scene, camera);
       }
       renderer.setAnimationLoop(animate);
     </script>
