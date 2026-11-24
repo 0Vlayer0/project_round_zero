@@ -58,7 +58,15 @@
 
       // Controller
       const right_controller = renderer.xr.getController(1);
+      const left_controller = renderer.xr.getController(0);
+      scene.add(left_controller);
       scene.add(right_controller);
+
+      // Hands
+      const right_hand = new THREE.Mesh(new THREE.SphereGeometry(1, 2, 3), new THREE.MeshBasicMaterial({ color: 0xffff00}))
+      right_controller.add(right_hand)
+      const left_hand = new THREE.Mesh(new THREE.SphereGeometry(1, 2, 3), new THREE.MeshBasicMaterial({ color: 0xffff00}))
+      left_controller.add(left_hand)
       
       // Gun
       const loader = new GLTFLoader();
@@ -68,7 +76,7 @@
           gun.scale.setScalar(0.0025);
           gun.position.set(0, 0, -0.3);
           gun.rotation.set(-Math.PI / 2, 0, Math.PI / 2);
-          right_controller.add(gun)
+          scene.add(gun)
       });
       
       // Resize
@@ -79,10 +87,12 @@
       });
 
       // Controller position
-      const right_controllerPosition = new THREE.Vector3();
+      const right_controller_position = new THREE.Vector3();
+      const left_controller_position = new THREE.Vector3()
       // Animation
       function animate() {
-          right_controller.getWorldPosition(right_controllerPosition);
+          right_controller.getWorldPosition(right_controller_position);
+          left_controller.getWorldPosition(left_controller_position);
           renderer.render(scene, camera);
       }
       renderer.setAnimationLoop(animate);
