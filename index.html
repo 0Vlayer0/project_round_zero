@@ -107,8 +107,6 @@
       const material = new THREE.MeshStandardMaterial({ map: texture });
       const mesh = new THREE.Mesh(geometry, material);
       mesh.position.z = -1;
-      mesh.rotation.z = -Math.PI / 2
-      mesh.rotation.y = -Math.PI / 2;
       scene.add(mesh);
 
       // Controller position
