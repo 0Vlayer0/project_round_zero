@@ -31,7 +31,7 @@
       
       // Camera
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.z = 5;
+      camera.position.z = -5;
       
       // Renderer
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -91,10 +91,11 @@
       const canvas = document.createElement('canvas');
       canvas.width = 1;
       canvas.height = 1;
-      canvas.style.background = "whitesmoke";
       const ctx = canvas.getContext('2d');
       
       // Draw text
+      ctx.fillStyle = "grey";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.font = 'bold 0.1px Arial';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'center';
