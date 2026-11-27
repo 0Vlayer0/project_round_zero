@@ -104,9 +104,6 @@
       const geometry = new THREE.PlaneGeometry(canvas.width, canvas.height);
       const material = new THREE.MeshStandardMaterial({ map: texture });
       const mesh = new THREE.Mesh(geometry, material);
-      
-      // Position in scene
-      mesh.position.z = 10;
       right_hand.add(mesh);
 
       // Controller position
