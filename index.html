@@ -91,7 +91,7 @@
       function create_button(x) {
       const canvas = document.createElement('canvas');
       canvas.width = 500;
-      canvas.height = 500;
+      canvas.height = 100;
       const ctx = canvas.getContext('2d');
       ctx.fillStyle = "white";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -102,10 +102,10 @@
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      ctx.fillText(x, 250, 100);
+      ctx.fillText(x, 250, 50);
       
       const texture = new THREE.CanvasTexture(canvas);
-      const geometry = new THREE.PlaneGeometry(1, 1);
+      const geometry = new THREE.PlaneGeometry(1, 0.2);
       const material = new THREE.MeshStandardMaterial({ map: texture });
       const mesh = new THREE.Mesh(geometry, material);
       mesh.position.z = -1;
