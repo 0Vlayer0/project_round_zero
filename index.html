@@ -88,7 +88,7 @@
 
       // Screen
       // Create a canvas element
-      function create_button(x) {
+      function create_button(a, x, y) {
       const canvas = document.createElement('canvas');
       canvas.width = 500;
       canvas.height = 100;
@@ -102,19 +102,18 @@
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      ctx.fillText(x, 250, 50);
+      ctx.fillText(a, 250, 50);
       
       const texture = new THREE.CanvasTexture(canvas);
       const geometry = new THREE.PlaneGeometry(1, 0.2);
       const material = new THREE.MeshStandardMaterial({ map: texture });
       const mesh = new THREE.Mesh(geometry, material);
+      mesh.position.set(x, y, -1)
       mesh.position.z = -1;
       scene.add(mesh);
       }
 
-create_button("nicez")
-
-
+      create_button("nicez", 0, .5)
 
       // Controller position
       const right_controller_position = new THREE.Vector3();
